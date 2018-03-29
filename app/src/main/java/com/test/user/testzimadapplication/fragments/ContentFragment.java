@@ -59,7 +59,7 @@ public class ContentFragment extends Fragment{
         AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.includedToolbar);
         Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
         TextView tittle = (TextView) appBarLayout.findViewById(R.id.toolbarTitleTextView);
-        tittle.setText("Cat Fragment");
+        tittle.setText("Details");
         toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +108,8 @@ public class ContentFragment extends Fragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((MainActivity) getActivity()).setVisiblityBottomBar(View.VISIBLE);
+        ((MainActivity) getActivity()).setVisiblityBottomBar(View.VISIBLE
+        );
     }
 
 }
