@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.roughike.bottombar.OnTabSelectListener;
 import com.test.user.testzimadapplication.databinding.ActivityMainBinding;
@@ -68,6 +69,10 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         dataBinding.bottomBar.setDefaultTab(R.id.tab_cats);
         dataBinding.bottomBar.setOnTabSelectListener(selectedListener);
+    }
+
+    public  void setVisiblityBottomBar(int visiblity) {
+        dataBinding.bottomBar.setVisibility(visiblity);
     }
 
     private void showFragment(String tag) {

@@ -67,6 +67,7 @@ public class ContentFragment extends Fragment{
                getActivity().getSupportFragmentManager().popBackStack();
             }
         });
+        ((MainActivity) getActivity()).setVisiblityBottomBar(View.GONE);
         return rootView;
     }
     @Override
@@ -107,6 +108,7 @@ public class ContentFragment extends Fragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        ((MainActivity) getActivity()).setVisiblityBottomBar(View.VISIBLE);
     }
 
 }
