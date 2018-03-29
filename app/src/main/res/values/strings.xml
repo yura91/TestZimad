@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TestZimadApplication</string>
+    <string name="tab_cats">Коты</string>
+    <string name="tab_dogs">Собаки</string>
+</resources>
