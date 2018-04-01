@@ -36,55 +36,14 @@ import retrofit2.Response;
  *
  */
 
-public class CatsFragment extends Fragment {
+public class CatsFragment extends BaseFragment {
     public static final String TAG = "CatsFragment";
-    private CatsDogsAdapter adapter;
-    private RecyclerView recyclerView;
     private String LIST_STATE_KEY = "mListState";
-    private RecyclerView.LayoutManager layoutManager;
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_cats, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.cats_list);
-        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.includedToolbar);
-        Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
-        TextView tittle = (TextView) appBarLayout.findViewById(R.id.toolbarTitleTextView);
-        tittle.setText("Cat Fragment");
-        rootView.setFocusableInTouchMode(true);
-        rootView.requestFocus();
-        toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-        rootView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        getActivity().finish();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        return rootView;
-    }
 
     @Override
     public void onStart() {
         super.onStart();
+        getTittle().setText("CatsFragment");
         GetCatDogService service = RetrofitInstance.getRetrofitInstance().create(GetCatDogService.class);
         Call<ApiResponse> call = service.getCatDogData("cat");
 
@@ -102,13 +61,13 @@ public class CatsFragment extends Fragment {
         });
     }
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        ((MainActivity) getActivity()).setmListStateCats(layoutManager.onSaveInstanceState());
-        outState.putParcelable(LIST_STATE_KEY, layoutManager.onSaveInstanceState());
+        ((MainActivity) getActivity()).setmListStateCats(getLayoutManager().onSaveInstanceState());
+        outState.putParcelable(LIST_STATE_KEY, getLayoutManager().onSaveInstanceState());
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
        //
@@ -118,33 +77,21 @@ public class CatsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
         if (((MainActivity) getActivity()).getmListStateCats() != null) {
-            layoutManager.onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
+            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((MainActivity) getActivity()).setmListStateCats(layoutManager.onSaveInstanceState());
+        ((MainActivity) getActivity()).setmListStateCats(getLayoutManager().onSaveInstanceState());
     }
 
     //endregion
-    private void generateEmployeeList(ArrayList<Data> dataList) {
-        adapter = new CatsDogsAdapter(dataList);
-        recyclerView.setAdapter(adapter);
-    }
+
 }

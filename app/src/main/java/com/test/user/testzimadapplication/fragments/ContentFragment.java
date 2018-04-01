@@ -70,15 +70,7 @@ public class ContentFragment extends Fragment{
         ((MainActivity) getActivity()).setVisiblityBottomBar(View.GONE);
         return rootView;
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            FragmentManager fm = getActivity().getSupportFragmentManager();
-            fm.popBackStack();
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
     @Override
     public void onStart() {
         super.onStart();

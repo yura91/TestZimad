@@ -33,57 +33,15 @@ import retrofit2.Response;
  * Created by User on 28.03.2018.
  */
 
-public class DogsFragment extends Fragment {
+public class DogsFragment extends BaseFragment {
     public static final String TAG = "DogsFragment";
-    private CatsDogsAdapter adapter;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private String LIST_STATE_KEY = "mListState";
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_dogs, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.dogs_list);
-        layoutManager = new LinearLayoutManager(getContext());
-        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.includedToolbar);
-        Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
-        TextView tittle = (TextView) appBarLayout.findViewById(R.id.toolbarTitleTextView);
-        tittle.setText("Dog Fragment");
-        toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
-        rootView.setFocusableInTouchMode(true);
-        rootView.requestFocus();
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
-        rootView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        getActivity().finish();
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-
-        recyclerView.setLayoutManager(layoutManager);
-        return rootView;
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        ((MainActivity) getActivity()).setmListStateDogs(layoutManager.onSaveInstanceState());
-        outState.putParcelable(LIST_STATE_KEY, layoutManager.onSaveInstanceState());
+        ((MainActivity) getActivity()).setmListStateDogs(getLayoutManager().onSaveInstanceState());
+        outState.putParcelable(LIST_STATE_KEY, getLayoutManager().onSaveInstanceState());
     }
 
     @Override
@@ -97,6 +55,7 @@ public class DogsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        getTittle().setText("DogsFragment");
         GetCatDogService service = RetrofitInstance.getRetrofitInstance().create(GetCatDogService.class);
         Call<ApiResponse> call = service.getCatDogData("dog");
 
@@ -118,40 +77,14 @@ public class DogsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (((MainActivity) getActivity()).getmListStateDogs() != null) {
-            layoutManager.onRestoreInstanceState(((MainActivity) getActivity()).getmListStateDogs());
+            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateDogs());
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            getActivity().finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ((MainActivity) getActivity()).setmListStateDogs(layoutManager.onSaveInstanceState());
-    }
-    private void generateEmployeeList(ArrayList<Data> dataList) {
-
-
-        adapter = new CatsDogsAdapter(dataList);
-
-        recyclerView.setAdapter(adapter);
+        ((MainActivity) getActivity()).setmListStateDogs(getLayoutManager().onSaveInstanceState());
     }
     //endregion
 
