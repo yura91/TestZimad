@@ -50,7 +50,7 @@ public class CatsFragment extends BaseFragment {
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                generateEmployeeList((ArrayList<Data>) response.body().getData());
+                generateEmployeeList((ArrayList<Data>) response.body().getData(), TAG);
                 Log.wtf("URL Called", call.request().url() + "");
             }
 
@@ -75,15 +75,6 @@ public class CatsFragment extends BaseFragment {
             ((MainActivity) getActivity()).setmListStateCats(savedInstanceState.getParcelable(LIST_STATE_KEY));
         }
         super.onActivityCreated(savedInstanceState);
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (((MainActivity) getActivity()).getmListStateCats() != null) {
-            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
-        }
     }
 
     @Override

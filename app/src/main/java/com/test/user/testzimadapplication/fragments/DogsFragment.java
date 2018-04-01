@@ -62,7 +62,7 @@ public class DogsFragment extends BaseFragment {
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                generateEmployeeList((ArrayList<Data>) response.body().getData());
+                generateEmployeeList((ArrayList<Data>) response.body().getData(), TAG);
                 Log.wtf("URL Called", call.request().url() + "");
             }
 
@@ -71,14 +71,6 @@ public class DogsFragment extends BaseFragment {
                 Log.wtf("URL Called", call.request().url() + "");
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (((MainActivity) getActivity()).getmListStateDogs() != null) {
-            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateDogs());
-        }
     }
 
     @Override

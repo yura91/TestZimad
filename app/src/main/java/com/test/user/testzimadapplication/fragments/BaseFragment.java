@@ -90,8 +90,12 @@ public class BaseFragment extends Fragment {
         super.onStart();
     }
 
-    protected void generateEmployeeList(ArrayList<Data> dataList) {
-        getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
+    protected void generateEmployeeList(ArrayList<Data> dataList, String tag) {
+        if(tag.equals(CatsFragment.TAG)) {
+            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
+        } else {
+            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateDogs());
+        }
         adapter = new CatsDogsAdapter(dataList);
         recyclerView.setAdapter(adapter);
     }
