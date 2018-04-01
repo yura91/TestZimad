@@ -21,7 +21,7 @@ public class MainActivity extends BaseActivity {
     private OnTabSelectListener selectedListener;
     private static Parcelable mListStateCats;
     private static Parcelable mListStateDogs;
-
+    private static int defaultTab = 0;
 
     public Parcelable getmListStateDogs() {
         return mListStateDogs;
@@ -46,10 +46,12 @@ public class MainActivity extends BaseActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_cats:
+                        defaultTab = R.id.tab_cats;
                         showFragment(CatsFragment.TAG);
                         break;
 
                     case R.id.tab_dogs:
+                        defaultTab = R.id.tab_dogs;
                         showFragment(DogsFragment.TAG);
                         break;
                 }
@@ -67,7 +69,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        dataBinding.bottomBar.setDefaultTab(R.id.tab_cats);
+        if(defaultTab == 0) {
+            dataBinding.bottomBar.setDefaultTab(R.id.tab_cats);
+        } else {
+            dataBinding.bottomBar.setDefaultTab(defaultTab);
+        }
         dataBinding.bottomBar.setOnTabSelectListener(selectedListener);
     }
 
