@@ -91,6 +91,7 @@ public class BaseFragment extends Fragment {
     }
 
     protected void generateEmployeeList(ArrayList<Data> dataList) {
+        getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
         adapter = new CatsDogsAdapter(dataList);
         recyclerView.setAdapter(adapter);
     }
