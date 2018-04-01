@@ -19,8 +19,8 @@ import com.test.user.testzimadapplication.fragments.DogsFragment;
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding dataBinding;
     private OnTabSelectListener selectedListener;
-    private Parcelable mListStateCats;
-    private Parcelable mListStateDogs;
+    private static Parcelable mListStateCats;
+    private static Parcelable mListStateDogs;
 
 
     public Parcelable getmListStateDogs() {
