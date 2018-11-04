@@ -1,7 +1,6 @@
 package com.test.user.testzimadapplication.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -91,11 +90,15 @@ public class BaseFragment extends Fragment {
     }
 
     protected void generateEmployeeList(ArrayList<Data> dataList, String tag) {
-        if(tag.equals(CatsFragment.TAG)) {
-            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
-        } else {
-            getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateDogs());
-        }
+      if (getActivity() != null) {
+      if (tag.equals(CatsFragment.TAG)) {
+        getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateCats());
+      } else {
+        getLayoutManager().onRestoreInstanceState(((MainActivity) getActivity()).getmListStateDogs());
+      }
+
+      }
+
         adapter = new CatsDogsAdapter(dataList);
         recyclerView.setAdapter(adapter);
     }
