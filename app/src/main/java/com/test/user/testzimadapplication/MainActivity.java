@@ -90,8 +90,8 @@ public class MainActivity extends BaseActivity {
                 case CatsFragment.TAG:
                     cachedFragment = getSupportFragmentManager().findFragmentByTag(tag);
                     if (cachedFragment == null) {
-                        newFragment = new CatsFragment();
-                    }
+                    newFragment = new CatsFragment();
+                }
                     break;
 
                 case DogsFragment.TAG:
@@ -107,9 +107,21 @@ public class MainActivity extends BaseActivity {
                 transaction
                         .replace(R.id.contentContainer, newFragment, tag)
                         .commit();
+                transaction.addToBackStack(tag);
+
             } catch (IllegalStateException e) {
-                // catchIllegalStateException(e, tag);
+                e.printStackTrace();
             }
+        } else {
+            try {
+                transaction
+                        .replace(R.id.contentContainer, cachedFragment, tag)
+                        .commit();
+                //transaction.addToBackStack(tag);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
         }
