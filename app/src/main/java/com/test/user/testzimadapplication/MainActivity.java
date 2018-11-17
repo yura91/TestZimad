@@ -1,13 +1,10 @@
 package com.test.user.testzimadapplication;
 
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.roughike.bottombar.OnTabSelectListener;
@@ -18,10 +15,17 @@ import com.test.user.testzimadapplication.fragments.DogsFragment;
 
 public class MainActivity extends BaseActivity {
     private ActivityMainBinding dataBinding;
-    private OnTabSelectListener selectedListener;
     private static Parcelable mListStateCats;
     private static Parcelable mListStateDogs;
-    private static int defaultTab = 0;
+    private static String Tag;
+
+    public static String getTag() {
+        return Tag;
+    }
+
+    public static void setTag(String tag) {
+        Tag = tag;
+    }
 
     public Parcelable getmListStateDogs() {
         return mListStateDogs;
@@ -40,41 +44,51 @@ public class MainActivity extends BaseActivity {
         this.mListStateCats = mListStateCats;
     }
 
-    {
-        selectedListener = new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                switch (tabId) {
-                    case R.id.tab_cats:
-                        defaultTab = R.id.tab_cats;
-                        showFragment(CatsFragment.TAG);
-                        break;
-
-                    case R.id.tab_dogs:
-                        defaultTab = R.id.tab_dogs;
-                        showFragment(DogsFragment.TAG);
-                        break;
-                }
-            }
-        };
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         dataBinding.setPresenter(this);
+
+    }
+
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(Tag == null){
+            showFragment(CatsFragment.TAG);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(defaultTab == 0) {
-            dataBinding.bottomBar.setDefaultTab(R.id.tab_cats);
-        } else {
-            dataBinding.bottomBar.setDefaultTab(defaultTab);
+
+      dataBinding.bottomBar.getTabWithId(R.id.tab_cats).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(!dataBinding.bottomBar.getTabWithId(R.id.tab_cats).isSelected()) {
+                dataBinding.bottomBar.selectTabWithId(R.id.tab_cats);
+                showFragment(CatsFragment.TAG);
+            }
         }
-        dataBinding.bottomBar.setOnTabSelectListener(selectedListener);
+      });
+
+      dataBinding.bottomBar.getTabWithId(R.id.tab_dogs).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+          if (!dataBinding.bottomBar.getTabWithId(R.id.tab_dogs).isSelected()) {
+              dataBinding.bottomBar.selectTabWithId(R.id.tab_dogs);
+
+              showFragment(DogsFragment.TAG);
+
+          }
+      }
+    });
     }
 
     public  void setVisiblityBottomBar(int visiblity) {

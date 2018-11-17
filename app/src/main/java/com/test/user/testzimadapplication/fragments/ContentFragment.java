@@ -71,6 +71,7 @@ public class ContentFragment extends Fragment{
         return rootView;
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
