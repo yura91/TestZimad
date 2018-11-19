@@ -17,15 +17,6 @@ public class MainActivity extends BaseActivity {
     private ActivityMainBinding dataBinding;
     private static Parcelable mListStateCats;
     private static Parcelable mListStateDogs;
-    private static String Tag;
-
-    public static String getTag() {
-        return Tag;
-    }
-
-    public static void setTag(String tag) {
-        Tag = tag;
-    }
 
     public Parcelable getmListStateDogs() {
         return mListStateDogs;
@@ -50,18 +41,10 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         dataBinding.setPresenter(this);
-
-    }
-
-
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(Tag == null){
+        if(savedInstanceState == null) {
             showFragment(CatsFragment.TAG);
         }
+
     }
 
     @Override
@@ -91,7 +74,8 @@ public class MainActivity extends BaseActivity {
     });
     }
 
-    public  void setVisiblityBottomBar(int visiblity) {
+    public  void
+    setVisiblityBottomBar(int visiblity) {
         dataBinding.bottomBar.setVisibility(visiblity);
     }
 
