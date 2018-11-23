@@ -17,9 +17,7 @@ import com.test.user.testzimadapplication.model.Data;
 
 import java.util.ArrayList;
 
-/**
- * Created by Navjacinth Mathew on 1/18/2017.
- */
+
 
 public class CatsDogsAdapter extends RecyclerView.Adapter<CatsDogsAdapter.CatsViewHolder> {
 

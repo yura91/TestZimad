@@ -15,9 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by User on 28.03.2018.
- */
+
 
 public class DogsFragment extends BaseFragment {
   public static final String TAG = "DogsFragment";

@@ -15,9 +15,7 @@ import com.bumptech.glide.Glide;
 import com.test.user.testzimadapplication.MainActivity;
 import com.test.user.testzimadapplication.R;
 
-/**
- * Created by User on 28.03.2018.
- */
+
 
 public class ContentFragment extends Fragment{
     public static final String TAG = "ContentFragment";
