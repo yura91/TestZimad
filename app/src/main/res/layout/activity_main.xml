@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable name="presenter" type="com.test.user.testzimadapplication.MainActivity"/>
-    </data>
-
-    <RelativeLayout
-        android:id="@+id/rootLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<RelativeLayout android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <FrameLayout
             android:id="@+id/contentContainer"
@@ -31,4 +26,3 @@
             app:bb_showShadow="false" />
 
     </RelativeLayout>
-</layout>

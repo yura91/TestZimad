@@ -46,7 +46,6 @@ public class CatsFragment extends BaseFragment {
         getTittle().setText("CatsFragment");
         GetCatDogService service = RetrofitInstance.getRetrofitInstance().create(GetCatDogService.class);
         Call<ApiResponse> call = service.getCatDogData("cat");
-        MainActivity.setTag(TAG);
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {

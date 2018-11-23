@@ -44,10 +44,10 @@ public class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_base, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.cats_list);
-        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.includedToolbar);
-        Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
-        tittle = (TextView) appBarLayout.findViewById(R.id.toolbarTitleTextView);
+        recyclerView = rootView.findViewById(R.id.cats_list);
+        AppBarLayout appBarLayout = rootView.findViewById(R.id.includedToolbar);
+        Toolbar toolbar = appBarLayout.findViewById(R.id.toolbar);
+        tittle = appBarLayout.findViewById(R.id.toolbarTitleTextView);
         rootView.setFocusableInTouchMode(true);
         rootView.requestFocus();
         toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);

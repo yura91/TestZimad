@@ -1,23 +1,20 @@
 package com.test.user.testzimadapplication;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
-import com.roughike.bottombar.OnTabSelectListener;
-import com.test.user.testzimadapplication.databinding.ActivityMainBinding;
+import com.roughike.bottombar.BottomBar;
 import com.test.user.testzimadapplication.fragments.CatsFragment;
 import com.test.user.testzimadapplication.fragments.ContentFragment;
 import com.test.user.testzimadapplication.fragments.DogsFragment;
 
 public class MainActivity extends BaseActivity {
-    private ActivityMainBinding dataBinding;
     private static Parcelable mListStateCats;
     private static Parcelable mListStateDogs;
-
+    private BottomBar bottomBar;
     public Parcelable getmListStateDogs() {
         return mListStateDogs;
     }
@@ -39,8 +36,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        dataBinding.setPresenter(this);
+        bottomBar = findViewById(R.id.bottomBar);
         if(savedInstanceState == null) {
             showFragment(CatsFragment.TAG);
         }
@@ -51,21 +47,21 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-      dataBinding.bottomBar.getTabWithId(R.id.tab_cats).setOnClickListener(new View.OnClickListener() {
+      bottomBar.getTabWithId(R.id.tab_cats).setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(!dataBinding.bottomBar.getTabWithId(R.id.tab_cats).isSelected()) {
-                dataBinding.bottomBar.selectTabWithId(R.id.tab_cats);
+            if(!bottomBar.getTabWithId(R.id.tab_cats).isSelected()) {
+                bottomBar.selectTabWithId(R.id.tab_cats);
                 showFragment(CatsFragment.TAG);
             }
         }
       });
 
-      dataBinding.bottomBar.getTabWithId(R.id.tab_dogs).setOnClickListener(new View.OnClickListener() {
+      bottomBar.getTabWithId(R.id.tab_dogs).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-          if (!dataBinding.bottomBar.getTabWithId(R.id.tab_dogs).isSelected()) {
-              dataBinding.bottomBar.selectTabWithId(R.id.tab_dogs);
+          if (!bottomBar.getTabWithId(R.id.tab_dogs).isSelected()) {
+              bottomBar.selectTabWithId(R.id.tab_dogs);
 
               showFragment(DogsFragment.TAG);
 
@@ -76,7 +72,7 @@ public class MainActivity extends BaseActivity {
 
     public  void
     setVisiblityBottomBar(int visiblity) {
-        dataBinding.bottomBar.setVisibility(visiblity);
+        bottomBar.setVisibility(visiblity);
     }
 
     private void showFragment(String tag) {
