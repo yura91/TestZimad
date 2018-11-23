@@ -4,13 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,17 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.test.user.testzimadapplication.MainActivity;
 import com.test.user.testzimadapplication.R;
-import com.test.user.testzimadapplication.RetrofitInstance;
-import com.test.user.testzimadapplication.adapter.CatsDogsAdapter;
-import com.test.user.testzimadapplication.model.ApiResponse;
-import com.test.user.testzimadapplication.model.Data;
-import com.test.user.testzimadapplication.network.GetCatDogService;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by User on 28.03.2018.
@@ -56,9 +40,9 @@ public class ContentFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_content, container, false);
         image = rootView.findViewById(R.id.cat_image);
         text = rootView.findViewById(R.id.txt_cat_image);
-        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.includedToolbar);
-        Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
-        TextView tittle = (TextView) appBarLayout.findViewById(R.id.toolbarTitleTextView);
+        AppBarLayout appBarLayout = rootView.findViewById(R.id.includedToolbar);
+        Toolbar toolbar = appBarLayout.findViewById(R.id.toolbar);
+        TextView tittle = appBarLayout.findViewById(R.id.toolbarTitleTextView);
         tittle.setText("Details");
         toolbar.setNavigationIcon(R.drawable.ic_navigation_arrow_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

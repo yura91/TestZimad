@@ -1,8 +1,6 @@
 package com.test.user.testzimadapplication.adapter;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,9 +62,9 @@ public class CatsDogsAdapter extends RecyclerView.Adapter<CatsDogsAdapter.CatsVi
 
         CatsViewHolder(View itemView) {
             super(itemView);
-            catImage = (ImageView) itemView.findViewById(R.id.cat_image);
-            catText = (TextView) itemView.findViewById(R.id.txt_cat_image);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.cat_item);
+            catImage = itemView.findViewById(R.id.cat_image);
+            catText = itemView.findViewById(R.id.txt_cat_image);
+            linearLayout = itemView.findViewById(R.id.cat_item);
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
