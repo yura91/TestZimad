@@ -111,6 +111,7 @@ public class MainActivity extends BaseActivity {
                 transaction
                         .replace(R.id.contentContainer, cachedFragment, tag)
                         .commit();
+
                 //transaction.addToBackStack(tag);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -131,6 +132,8 @@ public class MainActivity extends BaseActivity {
                 arguments.putString( "tittle" , text);
                 newFragment.setArguments(arguments);
                 try {
+                    transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,
+                            R.anim.slide_in_right, R.anim.slide_out_left);
                     transaction
                             .replace(R.id.contentContainer,newFragment, tag)
                             .addToBackStack(null)
