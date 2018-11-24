@@ -120,7 +120,6 @@ public class MainActivity extends BaseActivity {
         }
 
         }
-
     public void showContentFragment(String tag, String url, String text) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         Fragment newFragment = null;
@@ -128,12 +127,13 @@ public class MainActivity extends BaseActivity {
             case ContentFragment.TAG:
                 newFragment = new ContentFragment();
                 Bundle arguments = new Bundle();
+
                 arguments.putString( "url" , url);
                 arguments.putString( "tittle" , text);
                 newFragment.setArguments(arguments);
                 try {
-                    transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right,
-                            R.anim.slide_in_right, R.anim.slide_out_left);
+                    transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                            R.anim.slide_in_left, R.anim.slide_out_right);
                     transaction
                             .replace(R.id.contentContainer,newFragment, tag)
                             .addToBackStack(null)
